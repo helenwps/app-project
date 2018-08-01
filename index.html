@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>qudao</title>
+    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.options.path %>css/animate.min.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    // 初始化
+    var vConsole = null;
+    !function(){
+        if (/(iPhone|iPad|iPod|iOS )/i.test(navigator.userAgent)) {
+            document.body.style.fontFamily = 'PingFang SC Regular';
+        } else if (/(Android)/i.test(navigator.userAgent)) {
+            document.body.style.fontFamily = 'NoteSansCJKsc-Regular';
+        } else {
+            document.body.style.fontFamily = 'Microsoft Yahei';
+        }
+        if(typeof VConsole != undefined && typeof VConsole != "undefined"){
+            vConsole = new VConsole();
+        }
+
+    }();
+    (function (doc, win) {
+        //设计稿横向分辨率为375（iphone6），计划100px为1rem；
+        //布局的时候，各元素的css尺寸= 20 * （设备宽度/设计稿竖向分辨率）。
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = (100 * (clientWidth / 750)) > 100 ? 100 + 'px' : (100 * (clientWidth / 750)) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+</script>
+</html>
